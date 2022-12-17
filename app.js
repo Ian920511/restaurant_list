@@ -81,6 +81,24 @@ app.get("/search", (req, res) => {
   res.render("index", { restaurants, keyword });
 });
 
+app.get("/restaurants/:id/edit", (req, res) => {
+  const id = req.params.id;
+
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render("edit", { restaurant }))
+    .catch((error) => console.log(error));
+});
+
+app.post("/restaurants/:id/edit", (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.findById(id)
+    .update(req.body)
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch((error) => console.log(error))
+})
+
 app.listen(port, () => {
   console.log(`Sever is on http://localhost:${port}`);
 });
