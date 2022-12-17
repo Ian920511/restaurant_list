@@ -65,20 +65,25 @@ app.get("/search", (req, res) => {
     return res.redirect("/");
   }
 
-  const restaurants = restaurantList.results.filter((restaurant) => {
-    return (
-      restaurant.name.includes(keyword) ||
-      restaurant.category.includes(keyword) ||
-      restaurant.name_en.toLowerCase().trim().includes(keyword)
-    );
-  });
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => {
+      const restaurantsData = restaurants.filter((restaurant) => {
+        return (
+          restaurant.name.includes(keyword) ||
+          restaurant.category.includes(keyword) ||
+          restaurant.name_en.toLowerCase().trim().includes(keyword)
+        );
+      });
 
-  //如果沒有搜尋結果
-  if (restaurants.length === 0) {
-    return res.render("wrong");
-  }
+      //如果沒有搜尋結果
+      if (restaurants.length === 0) {
+        return res.render("wrong");
+      }
 
-  res.render("index", { restaurants, keyword });
+      res.render("index", { restaurants: restaurantsData, keyword });
+    })
+    .catch((error) => console.log(error));
 });
 
 app.get("/restaurants/:id/edit", (req, res) => {
