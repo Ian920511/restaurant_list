@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-const restaurantList = require("./restaurant.json");
+const Restaurant = require("./models/restaurant");
 const exphbs = require("express-handlebars");
 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -31,8 +31,10 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  const restaurants = restaurantList.results;
-  res.render("index", { restaurants });
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => res.render("index", { restaurants }))
+    .catch((error) => console.log(error));
 });
 
 app.get("/restaurant/:id", (req, res) => {
