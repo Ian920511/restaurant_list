@@ -60,28 +60,20 @@ app.get("/restaurants/:id", (req, res) => {
 
 app.get("/search", (req, res) => {
   const keyword = req.query.keyword.trim();
+  const regex = new RegExp(keyword, "i");
 
   if (!keyword.trim()) {
     return res.redirect("/");
   }
 
-  Restaurant.find()
+  Restaurant.find({ $or: [{ name: regex }, { category: regex }] })
     .lean()
-    .then((restaurants) => {
-      const restaurantsData = restaurants.filter((restaurant) => {
-        return (
-          restaurant.name.includes(keyword) ||
-          restaurant.category.includes(keyword) ||
-          restaurant.name_en.toLowerCase().trim().includes(keyword)
-        );
-      });
-
-      //如果沒有搜尋結果
-      if (restaurants.length === 0) {
-        return res.render("wrong");
+    .then((restaurantsData) => {
+      if (restaurantsData.length === 0) {
+        res.render("wrong");
+      } else {
+        res.render("index", { restaurants: restaurantsData, keyword });
       }
-
-      res.render("index", { restaurants: restaurantsData, keyword });
     })
     .catch((error) => console.log(error));
 });
