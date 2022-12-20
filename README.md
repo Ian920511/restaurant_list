@@ -80,3 +80,4 @@ ctrl + c
 - 資料庫: [MongoDB]
 - 編程資料庫: [Mongoose](https://mongoosejs.com/)@5.9.7
 - 環境變數: [dotenv](https://www.npmjs.com/package/dotenv)@16.0.3
+- 重構程式碼: [method-override](https://www.npmjs.com/package/method-override)@3.0.0
