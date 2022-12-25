@@ -40,31 +40,37 @@ cd restaurant_list //進入存放檔案的資料夾
 npm install  //安裝插件
 ```
 
-4.安裝完成後，需新增種子資料，輸入
+4.新增 .env 檔，設定環境變數連線 MongoDB
+
+```bash
+MONGODB_URI = mongodb+srv://<使用者帳號>:<使用者密碼>@<資料庫伺服器位置>/<資料庫名稱>
+```
+
+5.安裝完成後，需新增種子資料，輸入
 
 ```bash
 npm run seed
 ```
 
-5.完成後，輸入
+6.完成後，輸入
 
 ```bash
 npm run dev
 ```
 
-6.看見此行訊息則代表順利運行
+7.看見此行訊息則代表順利運行
 
 ```bash
 Sever is on http://localhost:3000
 ```
 
-7.進入網頁即可
+8.進入網頁即可
 
 ```bash
 http://localhost:3000
 ```
 
-8.若需要暫停，則輸入
+9.若需要暫停伺服器，則輸入
 
 ```bash
 ctrl + c
