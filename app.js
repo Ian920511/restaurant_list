@@ -9,7 +9,19 @@ const exphbs = require("express-handlebars");
 const routes = require("./routes");
 require("./config/mongoose");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main",
+    helpers: {
+      compare: function (arg1, arg2, options) {
+        if (arg1 === arg2) {
+          return options.fn(this);
+        }
+      },
+    },
+  })
+);
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));

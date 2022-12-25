@@ -7,10 +7,12 @@
         <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-2">
           <div class="input-group w-25">
             <select class="form-select" id="sort" name="sort">
-              <option>A > Z</option>
-              <option>Z > A</option>
-              <option>類別</option>
-              <option>地區</option>
+              <option value="default" {{#compare sort "default"}} selected {{/compare}}>舊 > 新</option>
+              <option value="fromNew" {{#compare sort "fromNew"}} selected {{/compare}}>新 > 舊</option>
+              <option value="fromA" {{#compare sort "fromA"}} selected {{/compare}}>A > Z</option>
+              <option value="fromZ" {{#compare sort "fromZ"}} selected {{/compare}}>Z > A</option>
+              <option value="fromCategory" {{#compare sort "fromCategory"}} selected {{/compare}}>類別</option>
+              <option value="fromLocation" {{#compare sort "fromLocation"}} selected {{/compare}}>地區</option>
             </select>
           </div>
           <div class="input-group w-75">
@@ -20,7 +22,7 @@
               class="form-control"
               placeholder="輸入餐廳、分類"
               aria-label="Restaurant Name..."
-              value=""
+              value="{{keyword}}"
               aria-describedby="search-button"
             />
             <button class="btn btn-major" type="submit" id="search-button"><i
