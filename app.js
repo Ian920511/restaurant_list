@@ -5,6 +5,10 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const port = 3000;
 
 const exphbs = require("express-handlebars");
@@ -30,7 +34,7 @@ app.set("view engine", "handlebars");
 
 app.use(
   session({
-    secret: "MySecret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
   })
