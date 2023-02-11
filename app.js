@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const session = require("express-session");
 
 const port = 3000;
 
@@ -23,6 +24,14 @@ app.engine(
   })
 );
 app.set("view engine", "handlebars");
+
+app.use(
+  session({
+    secret: "MySecret",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
