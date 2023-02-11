@@ -8,6 +8,8 @@ const port = 3000;
 
 const exphbs = require("express-handlebars");
 const routes = require("./routes");
+
+const usePassport = require("./config/passport");
 require("./config/mongoose");
 
 app.engine(
@@ -36,6 +38,9 @@ app.use(
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+usePassport(app);
+
 app.use(routes);
 
 app.listen(port, () => {
