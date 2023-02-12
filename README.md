@@ -4,13 +4,13 @@
 
 ## 介紹
 
-這是一個餐廳清單，可以尋找餐廳、查看資訊、新增資料。
+這是一個餐廳清單，可以讓使用者自由的尋找餐廳、查看資訊、新增餐廳。
 
 ---
 
 ## 功能
 
-- 能一次瀏覽所有餐廳
+- 使用者需註冊會員並登入使用餐廳清單
 - 可以查看餐廳的資訊
   - 圖片
   - 地址
@@ -40,13 +40,14 @@ cd restaurant_list //進入存放檔案的資料夾
 npm install  //安裝插件
 ```
 
-4.新增 .env 檔，設定環境變數連線 MongoDB
+4.新增 .env 檔，設定環境變數連線 MongoDB ，並根據 .env.example 檔案內資訊設置環境變數
 
 ```bash
 MONGODB_URI = mongodb+srv://<使用者帳號>:<使用者密碼>@<資料庫伺服器位置>/<資料庫名稱>
 ```
 
-5.安裝完成後，需新增種子資料，輸入
+5.安裝完成後，需新增種子資料，輸入下方程式碼:
+(種子帳號為: user1@example.com 及 user2@example.com ，密碼為: 12345678)
 
 ```bash
 npm run seed
@@ -87,3 +88,8 @@ ctrl + c
 - 編程資料庫: [Mongoose](https://mongoosejs.com/)@5.9.7
 - 環境變數: [dotenv](https://www.npmjs.com/package/dotenv)@16.0.3
 - 重構程式碼: [method-override](https://www.npmjs.com/package/method-override)@3.0.0
+- 使用者認證: [passport](https://www.npmjs.com/package/passport)@0.4.1
+- 使用者認證: [passport-local](https://www.npmjs.com/package/passport-local)@1.0.0
+- FACEBOOK 使用者認證: [passport-facebook](https://www.npmjs.com/package/passport-facebook)@3.0.0
+- 密碼加密: [bcryptjs](https://www.npmjs.com/package/bcryptjs)@2.4.3
+
